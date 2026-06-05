@@ -4,118 +4,211 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chicken Coop Games</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --yellow: #f5c842;
-      --brown: #7a4e2d;
-      --cream: #fdf6e3;
-      --dark: #2b1d0e;
-    }
-
-    body {
-      font-family: 'Georgia', serif;
-      background-color: var(--dark);
-      color: var(--cream);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .logo {
-      font-size: 5rem;
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      color: var(--yellow);
-      letter-spacing: 0.03em;
-      margin-bottom: 0.4rem;
-    }
-
-    .tagline {
-      font-size: clamp(1rem, 3vw, 1.3rem);
-      color: #c8a96e;
-      font-style: italic;
-      margin-bottom: 2.5rem;
-    }
-
-    .divider {
-      width: 60px;
-      height: 3px;
-      background: var(--yellow);
-      border-radius: 2px;
-      margin: 0 auto 2.5rem;
-    }
-
-    .coming-soon {
-      display: inline-block;
-      border: 2px solid var(--yellow);
-      color: var(--yellow);
-      padding: 0.6rem 1.8rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 3rem;
-    }
-
-    .blurb {
-      max-width: 480px;
-      line-height: 1.7;
-      color: #c8a96e;
-      font-size: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .contact {
-      font-size: 0.85rem;
-      color: #8a6a42;
-    }
-
-    .contact a {
-      color: var(--yellow);
-      text-decoration: none;
-    }
-
-    .contact a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      margin-top: 4rem;
-      font-size: 0.75rem;
-      color: #5a3e24;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="logo">🐔</div>
-  <h1>Chicken Coop Games</h1>
-  <p class="tagline">Small studio. Big ideas. Fresh eggs.</p>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#hero" class="nav-brand">
+      Chicken Coop Games
+      <span class="nav-pill">Cooperative Studio</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#games">Games</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#devlog">Devlog</a></li>
+      <li><a href="mailto:hello@chickencoopgames.ca" class="nav-cta">Say Hello</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-  <div class="divider"></div>
+  <!-- HERO -->
+  <section id="hero">
+    <span class="sparkle" style="top:22%;left:11%;font-size:1.3rem;opacity:0.3;transform:rotate(12deg)">✦</span>
+    <span class="sparkle" style="top:58%;left:7%;font-size:0.8rem;opacity:0.22;transform:rotate(-5deg)">✦</span>
+    <span class="sparkle" style="top:25%;right:9%;font-size:1rem;opacity:0.28;transform:rotate(-15deg)">✦</span>
+    <span class="sparkle" style="top:68%;right:13%;font-size:1.5rem;opacity:0.2;transform:rotate(20deg)">✦</span>
+    <span class="sparkle" style="top:16%;left:42%;font-size:0.65rem;opacity:0.22">★</span>
+    <span class="sparkle" style="top:78%;left:28%;font-size:0.55rem;opacity:0.18">★</span>
 
-  <span class="coming-soon">Coming Soon</span>
+    <p class="hero-kicker">Indie Game Cooperative</p>
+    <h1 class="hero-title">Chicken Coop<br><span class="pop">Games</span></h1>
+    <p class="hero-desc">We make indie games that bring people together. Worker owned and community driven.</p>
+    <div class="hero-ctas">
+      <a href="#games" class="btn btn-primary">Our Games</a>
+      <a href="#about" class="btn btn-outline">About the Coop</a>
+    </div>
 
-  <p class="blurb">
-    We're a small indie game studio pecking away at something fun.
-    Our first games are in the coop — check back soon.
-  </p>
+<img src="images/chicken-chase.png" alt="" class="hero-character" aria-hidden="true">
+  </section>
 
-  <p class="contact">
-    Say hello: <a href="mailto:hello@chickencoopgames.ca">hello@chickencoopgames.ca</a>
-  </p>
+  <!-- Wave: hero (#f8edd9) → games (#f0e2c6) -->
+  <div class="wave-wrap" style="background:#f8edd9;">
+    <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,36 C180,72 360,0 540,36 C720,72 900,0 1080,36 C1260,72 1380,18 1440,36 L1440,72 H0Z" fill="#f0e2c6"/>
+    </svg>
+  </div>
 
-  <footer>&copy; 2026 Chicken Coop Games</footer>
+  <!-- GAMES -->
+  <section id="games" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">What we're making</p>
+        <h2 class="section-title">Our <span class="pop">Games</span></h2>
+        <p class="section-blurb">Games built around real connection and worlds you actually want to spend time in.</p>
+      </div>
+
+      <div class="games-grid">
+
+        <div class="game-card">
+          <div class="game-thumb">
+            <img src="images/caved-in-capsule.png" alt="Caved In">
+            <div class="game-status s-soon">Coming Soon</div>
+          </div>
+          <div class="game-body">
+            <div class="game-tags">
+              <span class="tag">Multiplayer</span>
+              <span class="tag">Puzzle</span>
+              <span class="tag">Adventure</span>
+            </div>
+            <h3 class="game-title">Caved In</h3>
+            <p class="game-desc">Your crew is trapped underground. Work together to explore, solve, and survive your way back to the surface.</p>
+            <a href="#devlog" class="btn btn-outline btn-sm">Follow Development</a>
+          </div>
+        </div>
+
+        <div class="game-card game-card-ghost">
+          <div class="game-thumb game-thumb-tba">
+            <span class="tba-label">?</span>
+            <div class="game-status" style="color:var(--muted);">TBA</div>
+          </div>
+          <div class="game-body">
+            <div class="game-tags"><span class="tag">???</span></div>
+            <h3 class="game-title">Untitled</h3>
+            <p class="game-desc">Something new is cooking in the coop. More details when we are ready to share.</p>
+          </div>
+        </div>
+
+        <div class="game-card game-card-ghost">
+          <div class="game-thumb game-thumb-tba">
+            <span class="tba-label">?</span>
+            <div class="game-status" style="color:var(--muted);">TBA</div>
+          </div>
+          <div class="game-body">
+            <div class="game-tags"><span class="tag">???</span></div>
+            <h3 class="game-title">Untitled</h3>
+            <p class="game-desc">Another project in early stages. Stay tuned for announcements from the coop.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave: games (#f0e2c6) → about (#f8edd9) -->
+  <div class="wave-wrap" style="background:#f0e2c6;">
+    <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,36 C240,0 480,72 720,36 C960,0 1200,72 1440,36 L1440,72 H0Z" fill="#f8edd9"/>
+    </svg>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-text">
+          <p class="section-label" style="display:inline-flex;margin-bottom:1rem;">Who we are</p>
+          <h2>A small studio,<br><span class="pop">worker owned.</span></h2>
+          <p>Chicken Coop Games is a <strong>worker owned cooperative</strong>. Everyone on the team has an equal say in what we make and how we run the studio.</p>
+          <p>We want to help connect people through the games we make.</p>
+
+        </div>
+
+        <div class="about-side">
+          <div class="join-box">
+            <div class="join-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#e07a5f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <strong>Want to join the coop?</strong>
+              <span>We occasionally bring on new members. If you make games and believe in what we are building, we would love to hear from you.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave: about (#f8edd9) → devlog (#f0e2c6) -->
+  <div class="wave-wrap" style="background:#f8edd9;">
+    <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,36 C180,72 360,0 540,36 C720,72 900,0 1080,36 C1260,72 1380,18 1440,36 L1440,72 H0Z" fill="#f0e2c6"/>
+    </svg>
+  </div>
+
+  <!-- DEVLOG -->
+  <section id="devlog" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">From the coop</p>
+        <h2 class="section-title">Dev<span class="pop">log</span></h2>
+        <p class="section-blurb">Updates, behind the scenes looks, and stories from building a game as a cooperative.</p>
+      </div>
+
+      <div class="devlog-coming-soon">
+        <img src="images/chicken-pixel.png" alt="" class="cs-icon" aria-hidden="true">
+        <h3>Coming Soon</h3>
+        <p>We are heads down building right now. Devlog posts are on the way. Check back soon for updates, behind the scenes looks, and news from the coop.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave: devlog (#f0e2c6) → footer (#3d2a1a) -->
+  <div class="wave-wrap" style="background:#f0e2c6;">
+    <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,20 C360,65 720,0 1080,45 C1260,65 1380,22 1440,30 L1440,72 H0Z" fill="#3d2a1a"/>
+    </svg>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="f-name">Chicken Coop Games</div>
+        <p>We are a worker owned cooperative making indie games that bring people together.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#games">Our Games</a></li>
+          <li><a href="#about">About the Coop</a></li>
+          <li><a href="#devlog">Devlog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Join the Community</h4>
+        <p class="footer-signup-blurb">Get updates on our games and news from the coop.</p>
+        <form class="footer-signup-form" onsubmit="handleSignup(event)">
+          <input type="email" class="signup-input" placeholder="your@email.com" required>
+          <button type="submit" class="signup-btn">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Chicken Coop Games Co-operative</span>
+      <span>Made with love in the coop ✦</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 
 </body>
 </html>
