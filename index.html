@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicken Coop Games</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #f5c842;
+      --brown: #7a4e2d;
+      --cream: #fdf6e3;
+      --dark: #2b1d0e;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background-color: var(--dark);
+      color: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .logo {
+      font-size: 5rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: var(--yellow);
+      letter-spacing: 0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .tagline {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      color: #c8a96e;
+      font-style: italic;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: var(--yellow);
+      border-radius: 2px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .coming-soon {
+      display: inline-block;
+      border: 2px solid var(--yellow);
+      color: var(--yellow);
+      padding: 0.6rem 1.8rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .blurb {
+      max-width: 480px;
+      line-height: 1.7;
+      color: #c8a96e;
+      font-size: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact {
+      font-size: 0.85rem;
+      color: #8a6a42;
+    }
+
+    .contact a {
+      color: var(--yellow);
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.75rem;
+      color: #5a3e24;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">🐔</div>
+  <h1>Chicken Coop Games</h1>
+  <p class="tagline">Small studio. Big ideas. Fresh eggs.</p>
+
+  <div class="divider"></div>
+
+  <span class="coming-soon">Coming Soon</span>
+
+  <p class="blurb">
+    We're a small indie game studio pecking away at something fun.
+    Our first games are in the coop — check back soon.
+  </p>
+
+  <p class="contact">
+    Say hello: <a href="mailto:hello@chickencoopgames.ca">hello@chickencoopgames.ca</a>
+  </p>
+
+  <footer>&copy; 2026 Chicken Coop Games</footer>
+
+</body>
+</html>
