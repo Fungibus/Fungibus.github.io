@@ -3,10 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chicken Coop Games is a worker owned indie game cooperative making games that bring people together." />
+  <meta name="theme-color" content="#f8edd9" />
+  <meta property="og:title" content="Chicken Coop Games" />
+  <meta property="og:description" content="A worker owned indie game cooperative making games that bring people together." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chickencoopgames.ca/" />
+  <meta property="og:image" content="https://chickencoopgames.ca/images/caved-in-capsule.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <title>Chicken Coop Games</title>
+  <link rel="canonical" href="https://chickencoopgames.ca/" />
+  <link rel="icon" type="image/png" href="images/chicken-pixel.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&amp;family=Nunito:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,9 +31,9 @@
       <li><a href="#games">Games</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#devlog">Devlog</a></li>
-      <li><a href="mailto:hello@chickencoopgames.ca" class="nav-cta">Say Hello</a></li>
+      <li><a href="#contact" class="nav-cta" data-contact-link>Say Hello</a></li>
     </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-controls="navLinks" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -45,7 +55,7 @@
       <a href="#about" class="btn btn-outline">About the Coop</a>
     </div>
 
-<img src="images/chicken-chase.png" alt="" class="hero-character" aria-hidden="true">
+    <img src="images/chicken-chase.png" alt="" class="hero-character" aria-hidden="true">
   </section>
 
   <!-- Wave: hero (#f8edd9) → games (#f0e2c6) -->
@@ -61,7 +71,7 @@
       <div class="section-header">
         <p class="section-label">What we're making</p>
         <h2 class="section-title">Our <span class="pop">Games</span></h2>
-        <p class="section-blurb">Games built around real connection and worlds you actually want to spend time in.</p>
+        <p class="section-blurb">Games built around real connection and having fun with friends!</p>
       </div>
 
       <div class="games-grid">
@@ -179,7 +189,7 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  <footer id="contact">
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="f-name">Chicken Coop Games</div>
@@ -195,11 +205,8 @@
       </div>
       <div class="footer-col">
         <h4>Join the Community</h4>
-        <p class="footer-signup-blurb">Get updates on our games and news from the coop.</p>
-        <form class="footer-signup-form" onsubmit="handleSignup(event)">
-          <input type="email" class="signup-input" placeholder="your@email.com" required>
-          <button type="submit" class="signup-btn">Subscribe</button>
-        </form>
+        <p class="footer-signup-blurb">Want updates on our games and news from the coop? Send us a note.</p>
+        <a href="#contact" class="signup-btn footer-mail-link" data-contact-link data-subject="Chicken Coop Games updates">Email Us</a>
       </div>
     </div>
     <div class="footer-bottom">

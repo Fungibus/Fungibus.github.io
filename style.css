@@ -540,12 +540,9 @@ footer {
 
 .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.45); max-width: 260px; line-height: 1.6; margin-bottom: 0.75rem; }
 .footer-signup-blurb { font-size: 0.82rem; color: rgba(255,255,255,0.45); margin-bottom: 0.8rem; line-height: 1.5; }
-.footer-signup-form { display: flex; flex-direction: column; gap: 0.5rem; }
-.signup-input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 0.55rem 0.85rem; color: #fff; font-size: 0.88rem; font-family: 'Nunito', sans-serif; outline: none; transition: border-color 0.2s; }
-.signup-input::placeholder { color: rgba(255,255,255,0.3); }
-.signup-input:focus { border-color: var(--coral); }
 .signup-btn { background: var(--coral); color: #fff; border: none; border-radius: 8px; padding: 0.55rem 1rem; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: background 0.2s; }
 .signup-btn:hover { background: var(--coral-2); }
+.footer-mail-link { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
 
 .footer-col h4 {
   font-size: 0.72rem;
