@@ -39,12 +39,12 @@
 
   <!-- HERO -->
   <section id="hero">
-    <span class="sparkle" style="top:21%;left:10%;font-size:1.3rem;opacity:0.28;transform:rotate(12deg)">✦</span>
-    <span class="sparkle" style="top:60%;left:9%;font-size:0.8rem;opacity:0.2;transform:rotate(-5deg)">✦</span>
-    <span class="sparkle" style="top:19%;right:20%;font-size:1rem;opacity:0.24;transform:rotate(-15deg)">✦</span>
-    <span class="sparkle" style="top:34%;right:24%;font-size:1.4rem;opacity:0.16;transform:rotate(20deg)">✦</span>
-    <span class="sparkle" style="top:14%;left:39%;font-size:0.65rem;opacity:0.2">★</span>
-    <span class="sparkle" style="top:79%;left:23%;font-size:0.55rem;opacity:0.15">★</span>
+    <span class="sparkle sparkle-1">✦</span>
+    <span class="sparkle sparkle-2">✦</span>
+    <span class="sparkle sparkle-3">✦</span>
+    <span class="sparkle sparkle-4">✦</span>
+    <span class="sparkle sparkle-5">★</span>
+    <span class="sparkle sparkle-6">★</span>
 
     <p class="hero-kicker">Indie Game Cooperative</p>
     <h1 class="hero-title">Chicken Coop<br><span class="pop">Games</span></h1>
@@ -57,10 +57,10 @@
     <img src="images/chicken-chase.png" alt="" class="hero-character" aria-hidden="true">
   </section>
 
-  <!-- Wave: hero (#f8edd9) → games (#f0e2c6) -->
-  <div class="wave-wrap" style="background:#f8edd9;">
+  <!-- Wave: hero to games -->
+  <div class="wave-wrap wave-bg-primary">
     <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,36 C180,72 360,0 540,36 C720,72 900,0 1080,36 C1260,72 1380,18 1440,36 L1440,72 H0Z" fill="#f0e2c6"/>
+      <path class="wave-fill-alt" d="M0,36 C180,72 360,0 540,36 C720,72 900,0 1080,36 C1260,72 1380,18 1440,36 L1440,72 H0Z"/>
     </svg>
   </div>
 
@@ -95,7 +95,7 @@
         <div class="game-card game-card-ghost">
           <div class="game-thumb game-thumb-tba">
             <span class="tba-label">?</span>
-            <div class="game-status" style="color:var(--muted);">TBA</div>
+            <div class="game-status s-tba">TBA</div>
           </div>
           <div class="game-body">
             <div class="game-tags"><span class="tag">???</span></div>
@@ -107,7 +107,7 @@
         <div class="game-card game-card-ghost">
           <div class="game-thumb game-thumb-tba">
             <span class="tba-label">?</span>
-            <div class="game-status" style="color:var(--muted);">TBA</div>
+            <div class="game-status s-tba">TBA</div>
           </div>
           <div class="game-body">
             <div class="game-tags"><span class="tag">???</span></div>
@@ -121,10 +121,10 @@
     </div>
   </section>
 
-  <!-- Wave: games (#f0e2c6) → about (#f8edd9) -->
-  <div class="wave-wrap" style="background:#f0e2c6;">
+  <!-- Wave: games to about -->
+  <div class="wave-wrap wave-bg-alt">
     <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,36 C240,0 480,72 720,36 C960,0 1200,72 1440,36 L1440,72 H0Z" fill="#f8edd9"/>
+      <path class="wave-fill-primary" d="M0,36 C240,0 480,72 720,36 C960,0 1200,72 1440,36 L1440,72 H0Z"/>
     </svg>
   </div>
 
@@ -134,7 +134,7 @@
       <div class="about-grid">
 
         <div class="about-text">
-          <p class="section-label" style="display:inline-flex;margin-bottom:1rem;">Who we are</p>
+          <p class="section-label about-label">Who we are</p>
           <h2>A small studio,<br><span class="pop">worker owned.</span></h2>
           <p>Chicken Coop Games is a <strong>worker owned cooperative</strong>. Everyone on the team has an equal say in what we make and how we run the studio.</p>
           <p>We want to help connect people through the games we make.</p>
@@ -144,7 +144,7 @@
         <div class="about-side">
           <div class="join-box">
             <div class="join-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#e07a5f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
             <div>
               <strong>Want to join the coop?</strong>
@@ -173,10 +173,10 @@
     </div>
   </section>
 
-  <!-- Wave: about (#f8edd9) → devlog (#f0e2c6) -->
-  <div class="wave-wrap" style="background:#f8edd9;">
+  <!-- Wave: about to devlog -->
+  <div class="wave-wrap wave-bg-primary">
     <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,36 C180,72 360,0 540,36 C720,72 900,0 1080,36 C1260,72 1380,18 1440,36 L1440,72 H0Z" fill="#f0e2c6"/>
+      <path class="wave-fill-alt" d="M0,36 C180,72 360,0 540,36 C720,72 900,0 1080,36 C1260,72 1380,18 1440,36 L1440,72 H0Z"/>
     </svg>
   </div>
 
@@ -206,10 +206,10 @@
     </div>
   </section>
 
-  <!-- Wave: devlog (#f0e2c6) → footer (#3d2a1a) -->
-  <div class="wave-wrap" style="background:#f0e2c6;">
+  <!-- Wave: devlog to footer -->
+  <div class="wave-wrap wave-bg-alt">
     <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,20 C360,65 720,0 1080,45 C1260,65 1380,22 1440,30 L1440,72 H0Z" fill="#3d2a1a"/>
+      <path class="wave-fill-dark" d="M0,20 C360,65 720,0 1080,45 C1260,65 1380,22 1440,30 L1440,72 H0Z"/>
     </svg>
   </div>
 

@@ -1,63 +1,124 @@
-const toggle = document.getElementById('navToggle');
-const links  = document.getElementById('navLinks');
-const contactLinks = document.querySelectorAll('[data-contact-link]');
+const SELECTORS = {
+  contactLink: '[data-contact-link]',
+  navLinks: '#navLinks',
+  navToggle: '#navToggle',
+  runnerBest: '#runnerBest',
+  runnerButton: '#runnerButton',
+  runnerCanvas: '#runnerCanvas',
+  runnerOverlay: '#runnerOverlay',
+  runnerScore: '#runnerScore',
+  runnerState: '#runnerState'
+};
 
-if (toggle && links) {
+const RUNNER_STORAGE_KEY = 'coopRunnerBest';
+const CONTACT_EMAIL_CODES = {
+  local: [104, 101, 108, 108, 111],
+  domain: [99, 104, 105, 99, 107, 101, 110, 99, 111, 111, 112, 103, 97, 109, 101, 115, 46, 99, 97]
+};
+
+const RUNNER_COLORS = {
+  bg: '#f8edd9',
+  bgAlt: '#f0e2c6',
+  chickenBody: '#fff2d8',
+  chickenComb: '#e07a5f',
+  cloud: 'rgba(105,180,200,0.14)',
+  coralSoft: 'rgba(224,122,95,0.12)',
+  dark: '#3d2a1a',
+  groundDash: '#c4a88a',
+  groundDashAlt: '#d8bd98',
+  hay: '#f0b840',
+  hayDark: '#c98f2f',
+  hayLight: '#f6ca63',
+  wood: '#6b4e38',
+  woodLight: '#9a7a62'
+};
+
+const query = (selector) => document.querySelector(selector);
+
+const queryAll = (selector) => Array.from(document.querySelectorAll(selector));
+
+const decodeEmailPart = (codes) => codes.map((code) => String.fromCharCode(code)).join('');
+
+const getContactEmail = () => [
+  decodeEmailPart(CONTACT_EMAIL_CODES.local),
+  decodeEmailPart(CONTACT_EMAIL_CODES.domain)
+].join('@');
+
+const getStoredNumber = (key) => {
+  try {
+    return Number(localStorage.getItem(key)) || 0;
+  } catch (error) {
+    return 0;
+  }
+};
+
+const setStoredNumber = (key, value) => {
+  try {
+    localStorage.setItem(key, String(value));
+  } catch (error) {
+    // Storage can be unavailable in private browsing modes.
+  }
+};
+
+const initializeNavigation = () => {
+  const toggle = query(SELECTORS.navToggle);
+  const links = query(SELECTORS.navLinks);
+
+  if (!toggle || !links) return;
+
+  const closeMenu = () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
   toggle.addEventListener('click', () => {
     const isOpen = links.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
 
   links.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      links.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeMenu);
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 640) {
-      links.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
+    if (window.innerWidth > 640) closeMenu();
   });
-}
+};
 
-const decodeEmailPart = (codes) => codes.map((code) => String.fromCharCode(code)).join('');
-const contactEmail = [
-  decodeEmailPart([104, 101, 108, 108, 111]),
-  decodeEmailPart([99, 104, 105, 99, 107, 101, 110, 99, 111, 111, 112, 103, 97, 109, 101, 115, 46, 99, 97])
-].join('@');
+const initializeContactLinks = () => {
+  const contactEmail = getContactEmail();
 
-contactLinks.forEach((link) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
+  queryAll(SELECTORS.contactLink).forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
 
-    const subject = link.dataset.subject ? `?subject=${encodeURIComponent(link.dataset.subject)}` : '';
-    window.location.href = `mailto:${contactEmail}${subject}`;
+      const subject = link.dataset.subject ? `?subject=${encodeURIComponent(link.dataset.subject)}` : '';
+      window.location.href = `mailto:${contactEmail}${subject}`;
+    });
   });
-});
+};
 
-const runnerCanvas = document.getElementById('runnerCanvas');
-const runnerButton = document.getElementById('runnerButton');
-const runnerOverlay = document.getElementById('runnerOverlay');
-const runnerState = document.getElementById('runnerState');
-const runnerScore = document.getElementById('runnerScore');
-const runnerBest = document.getElementById('runnerBest');
+const initializeRunner = () => {
+  const canvas = query(SELECTORS.runnerCanvas);
+  const button = query(SELECTORS.runnerButton);
+  const overlay = query(SELECTORS.runnerOverlay);
+  const state = query(SELECTORS.runnerState);
+  const scoreOutput = query(SELECTORS.runnerScore);
+  const bestOutput = query(SELECTORS.runnerBest);
 
-if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore && runnerBest) {
-  const ctx = runnerCanvas.getContext('2d');
-  const width = runnerCanvas.width;
-  const height = runnerCanvas.height;
+  if (!canvas || !button || !overlay || !state || !scoreOutput || !bestOutput) return;
+
+  const ctx = canvas.getContext('2d');
+  const width = canvas.width;
+  const height = canvas.height;
   const groundY = 205;
-  const bestKey = 'coopRunnerBest';
   const chicken = new Image();
 
   let mode = 'ready';
   let lastTime = 0;
   let elapsed = 0;
   let score = 0;
-  let bestScore = 0;
+  let bestScore = getStoredNumber(RUNNER_STORAGE_KEY);
   let speed = 330;
   let nextObstacle = 1.15;
   let groundOffset = 0;
@@ -72,22 +133,16 @@ if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore 
     grounded: true
   };
 
-  try {
-    bestScore = Number(localStorage.getItem(bestKey)) || 0;
-  } catch (error) {
-    bestScore = 0;
-  }
-
-  runnerBest.textContent = String(bestScore);
+  bestOutput.textContent = String(bestScore);
 
   const setOverlay = (text, isVisible, isGameOver = false) => {
-    runnerState.textContent = text;
-    runnerOverlay.classList.toggle('show', isVisible);
-    runnerOverlay.classList.toggle('game-over', isGameOver);
+    state.textContent = text;
+    overlay.classList.toggle('show', isVisible);
+    overlay.classList.toggle('game-over', isGameOver);
   };
 
   const setScore = (value) => {
-    runnerScore.textContent = String(Math.floor(value));
+    scoreOutput.textContent = String(Math.floor(value));
   };
 
   const resetRun = () => {
@@ -106,23 +161,17 @@ if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore 
     resetRun();
     mode = 'running';
     lastTime = performance.now();
-    runnerButton.textContent = 'Restart';
+    button.textContent = 'Restart';
     setOverlay('', false);
-    runnerCanvas.focus({ preventScroll: true });
+    canvas.focus({ preventScroll: true });
   };
 
   const endRun = () => {
     mode = 'gameover';
     bestScore = Math.max(bestScore, Math.floor(score));
-    runnerBest.textContent = String(bestScore);
-
-    try {
-      localStorage.setItem(bestKey, String(bestScore));
-    } catch (error) {
-      // Storage can be unavailable in private browsing modes.
-    }
-
-    runnerButton.textContent = 'Again';
+    bestOutput.textContent = String(bestScore);
+    setStoredNumber(RUNNER_STORAGE_KEY, bestScore);
+    button.textContent = 'Again';
     setOverlay('Game Over', true, true);
   };
 
@@ -208,9 +257,7 @@ if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore 
 
     setScore(score);
 
-    if (hit) {
-      endRun();
-    }
+    if (hit) endRun();
   };
 
   const drawPixelRect = (x, y, rectWidth, rectHeight, color) => {
@@ -219,46 +266,46 @@ if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore 
   };
 
   const drawBackground = () => {
-    ctx.fillStyle = '#f8edd9';
+    ctx.fillStyle = RUNNER_COLORS.bg;
     ctx.fillRect(0, 0, width, height);
 
-    ctx.fillStyle = 'rgba(105,180,200,0.14)';
+    ctx.fillStyle = RUNNER_COLORS.cloud;
     ctx.fillRect(86, 44, 54, 10);
     ctx.fillRect(110, 32, 72, 12);
     ctx.fillRect(610, 56, 76, 10);
     ctx.fillRect(646, 42, 56, 14);
 
-    ctx.fillStyle = 'rgba(224,122,95,0.12)';
+    ctx.fillStyle = RUNNER_COLORS.coralSoft;
     for (let x = width - 120; x > 0; x -= 180) {
       ctx.fillRect(x, 96, 8, 8);
       ctx.fillRect(x + 18, 82, 6, 6);
     }
 
-    drawPixelRect(0, groundY, width, 5, '#3d2a1a');
-    drawPixelRect(0, groundY + 5, width, height - groundY, '#f0e2c6');
+    drawPixelRect(0, groundY, width, 5, RUNNER_COLORS.dark);
+    drawPixelRect(0, groundY + 5, width, height - groundY, RUNNER_COLORS.bgAlt);
 
     for (let x = -groundOffset; x < width; x += 36) {
-      drawPixelRect(x, groundY + 14, 18, 4, '#c4a88a');
-      drawPixelRect(x + 24, groundY + 30, 8, 4, '#d8bd98');
+      drawPixelRect(x, groundY + 14, 18, 4, RUNNER_COLORS.groundDash);
+      drawPixelRect(x + 24, groundY + 30, 8, 4, RUNNER_COLORS.groundDashAlt);
     }
   };
 
   const drawObstacle = (obstacle) => {
     if (obstacle.type === 'fence') {
-      drawPixelRect(obstacle.x + 4, obstacle.y, 8, obstacle.height, '#6b4e38');
-      drawPixelRect(obstacle.x + 22, obstacle.y + 8, 8, obstacle.height - 8, '#6b4e38');
-      drawPixelRect(obstacle.x, obstacle.y + 20, obstacle.width, 8, '#9a7a62');
-      drawPixelRect(obstacle.x, obstacle.y + 38, obstacle.width, 7, '#9a7a62');
-      drawPixelRect(obstacle.x + 5, obstacle.y - 5, 6, 5, '#3d2a1a');
-      drawPixelRect(obstacle.x + 23, obstacle.y + 3, 6, 5, '#3d2a1a');
+      drawPixelRect(obstacle.x + 4, obstacle.y, 8, obstacle.height, RUNNER_COLORS.wood);
+      drawPixelRect(obstacle.x + 22, obstacle.y + 8, 8, obstacle.height - 8, RUNNER_COLORS.wood);
+      drawPixelRect(obstacle.x, obstacle.y + 20, obstacle.width, 8, RUNNER_COLORS.woodLight);
+      drawPixelRect(obstacle.x, obstacle.y + 38, obstacle.width, 7, RUNNER_COLORS.woodLight);
+      drawPixelRect(obstacle.x + 5, obstacle.y - 5, 6, 5, RUNNER_COLORS.dark);
+      drawPixelRect(obstacle.x + 23, obstacle.y + 3, 6, 5, RUNNER_COLORS.dark);
       return;
     }
 
-    drawPixelRect(obstacle.x, obstacle.y + 8, obstacle.width, obstacle.height - 8, '#f0b840');
-    drawPixelRect(obstacle.x + 4, obstacle.y, obstacle.width - 8, 8, '#f6ca63');
-    drawPixelRect(obstacle.x + 7, obstacle.y + 15, obstacle.width - 14, 5, '#c98f2f');
-    drawPixelRect(obstacle.x + 12, obstacle.y + 27, obstacle.width - 24, 4, '#c98f2f');
-    drawPixelRect(obstacle.x, obstacle.y + obstacle.height - 5, obstacle.width, 5, '#9a7a62');
+    drawPixelRect(obstacle.x, obstacle.y + 8, obstacle.width, obstacle.height - 8, RUNNER_COLORS.hay);
+    drawPixelRect(obstacle.x + 4, obstacle.y, obstacle.width - 8, 8, RUNNER_COLORS.hayLight);
+    drawPixelRect(obstacle.x + 7, obstacle.y + 15, obstacle.width - 14, 5, RUNNER_COLORS.hayDark);
+    drawPixelRect(obstacle.x + 12, obstacle.y + 27, obstacle.width - 24, 4, RUNNER_COLORS.hayDark);
+    drawPixelRect(obstacle.x, obstacle.y + obstacle.height - 5, obstacle.width, 5, RUNNER_COLORS.woodLight);
   };
 
   const drawChicken = () => {
@@ -272,11 +319,11 @@ if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore 
       return;
     }
 
-    drawPixelRect(player.x + 14, player.y + 22, 46, 36, '#fff2d8');
-    drawPixelRect(player.x + 50, player.y + 12, 20, 24, '#fff2d8');
-    drawPixelRect(player.x + 55, player.y + 6, 14, 8, '#e07a5f');
-    drawPixelRect(player.x + 68, player.y + 24, 10, 6, '#f0b840');
-    drawPixelRect(player.x + 23, player.y + 54, 8, 12, '#6b4e38');
+    drawPixelRect(player.x + 14, player.y + 22, 46, 36, RUNNER_COLORS.chickenBody);
+    drawPixelRect(player.x + 50, player.y + 12, 20, 24, RUNNER_COLORS.chickenBody);
+    drawPixelRect(player.x + 55, player.y + 6, 14, 8, RUNNER_COLORS.chickenComb);
+    drawPixelRect(player.x + 68, player.y + 24, 10, 6, RUNNER_COLORS.hay);
+    drawPixelRect(player.x + 23, player.y + 54, 8, 12, RUNNER_COLORS.wood);
   };
 
   const drawScene = () => {
@@ -284,34 +331,28 @@ if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore 
     obstacles.forEach(drawObstacle);
     drawChicken();
 
-    if (mode === 'ready') {
-      setOverlay('', false);
-    }
+    if (mode === 'ready') setOverlay('', false);
   };
 
   const loop = (time) => {
     const dt = Math.min((time - lastTime) / 1000 || 0, 0.032);
     lastTime = time;
 
-    if (mode === 'running') {
-      update(dt);
-    }
+    if (mode === 'running') update(dt);
 
     drawScene();
     requestAnimationFrame(loop);
   };
 
-  runnerButton.addEventListener('click', startRun);
-  runnerCanvas.addEventListener('pointerdown', handleAction);
+  button.addEventListener('click', startRun);
+  canvas.addEventListener('pointerdown', handleAction);
 
   document.addEventListener('keydown', (event) => {
     const activeTag = document.activeElement ? document.activeElement.tagName : '';
     const isTyping = activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT';
     const isJumpKey = event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyW';
 
-    if (!isTyping && isJumpKey) {
-      handleAction(event);
-    }
+    if (!isTyping && isJumpKey) handleAction(event);
   });
 
   chicken.onload = drawScene;
@@ -319,4 +360,8 @@ if (runnerCanvas && runnerButton && runnerOverlay && runnerState && runnerScore 
   resetRun();
   drawScene();
   requestAnimationFrame(loop);
-}
+};
+
+initializeNavigation();
+initializeContactLinks();
+initializeRunner();
