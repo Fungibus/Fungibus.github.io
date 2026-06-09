@@ -14,6 +14,13 @@ if (toggle && links) {
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 640) {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
 }
 
 const decodeEmailPart = (codes) => codes.map((code) => String.fromCharCode(code)).join('');
