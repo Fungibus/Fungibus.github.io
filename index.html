@@ -117,6 +117,7 @@
         </div>
 
       </div>
+
     </div>
   </section>
 
@@ -152,6 +153,22 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="runner-panel runner-panel-lowkey" id="coop-runner">
+        <div class="runner-scoreboard" aria-live="polite">
+          <span>Score <strong id="runnerScore">0</strong></span>
+          <span>Best <strong id="runnerBest">0</strong></span>
+        </div>
+
+        <button class="btn btn-primary runner-button" id="runnerButton" type="button">Start</button>
+
+        <div class="runner-frame">
+          <canvas id="runnerCanvas" class="runner-canvas" width="900" height="260" tabindex="0" aria-label="Coop Runner mini game"></canvas>
+          <div class="runner-overlay" id="runnerOverlay" aria-live="polite">
+            <span id="runnerState">Ready</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
